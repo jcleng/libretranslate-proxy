@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  libretranslate:
+    image: registry.cn-hangzhou.aliyuncs.com/jcleng/libretranslate-libretranslate
+    container_name: trans
+    restart: always
+    # ports:
+    #   - "5000:5000"
+    environment:
+      - LT_LOAD_ONLY=en,zh
+    volumes:
+      - /home/jcleng/work/libretranslate/.local/:/home/libretranslate/.local/:rw
+
+  libretranslate-proxy:
+    # build: .
+    image: registry.cn-hangzhou.aliyuncs.com/jcleng/libretranslate-proxy
+    container_name: libretranslate-proxy
+    environment:
+      - LIBRE_URL=http://libretranslate:5000/translate
+    ports:
+      - "50116:50116"
+    restart: always
+    depends_on:
+      - libretranslate
