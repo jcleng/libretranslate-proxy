@@ -5,8 +5,8 @@ services:
     image: registry.cn-hangzhou.aliyuncs.com/jcleng/libretranslate-libretranslate
     container_name: trans
     restart: always
-    # ports:
-    #   - "5000:5000"
+    ports:
+      - "5000:5000"
     environment:
       - LT_LOAD_ONLY=en,zh
     volumes:
