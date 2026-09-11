@@ -10,3 +10,15 @@ Content-Type: application/json
     "source_lang": "en",
     "target_lang": "zh-CN"
 }
+### 测试是否代理成功
+POST http://127.0.0.1:50116/translate
+Content-Type: application/json
+
+{
+    "text_list": [
+        "你会干什么",
+        "是的"
+    ],
+    "source_lang": "zh-CN",
+    "target_lang": "en"
+}
