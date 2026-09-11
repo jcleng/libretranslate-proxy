@@ -14,7 +14,7 @@ docker compose up -d
 - Tencent-Hunyuan 腾讯Hunyuan本地模型翻译
 
 ```yml
-  models_hunyuan: # https://www.modelscope.cn/models/Tencent-Hunyuan/Hy-MT2-1.8B-1.25Bit-GGUF/files
+  models_hunyuan: # https://www.modelscope.cn/models/Tencent-Hunyuan/Hy-MT2-1.8B-GGUF/files
     image: registry.cn-hangzhou.aliyuncs.com/jcleng/llama-server:pr22836 #镜像包
     container_name: models_hunyuan
     restart: unless-stopped
@@ -23,7 +23,7 @@ docker compose up -d
     ports:
       - "4280:8080"
     command: >
-      -m /models/Hy-MT2-1.8B-1.25Bit.gguf
+      -m /models/Hy-MT2-1.8B-Q4_K_M.gguf
       -c 2048
       -t 8
       -tb 8
