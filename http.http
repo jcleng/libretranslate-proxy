@@ -1,0 +1,12 @@
+### 测试是否代理成功
+POST http://127.0.0.1:50116/translate
+Content-Type: application/json
+
+{
+    "text_list": [
+        "Hello world",
+        "The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again."
+    ],
+    "source_lang": "en",
+    "target_lang": "zh-CN"
+}
