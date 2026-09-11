@@ -1,20 +1,12 @@
-FROM registry.cn-hangzhou.aliyuncs.com/jcleng/library-python:3.11-slim
+FROM registry.cn-hangzhou.aliyuncs.com/jcleng/library-alpine:3.20.1
+
+RUN apk add --no-cache curl tar \
+    && curl -fsSL https://dl.static-php.dev/static-php-cli/common/php-8.1.23-cli-linux-x86_64.tar.gz | tar -xz -C /usr/local/bin \
+    && rm -rf /var/cache/apk/*
 
 WORKDIR /app
+COPY . .
 
-# 设置环境变量
-ENV PYTHONUNBUFFERED=1
-ENV LIBRE_URL=http://libretranslate:5000
-
-# 复制 Python 脚本到镜像内
-COPY translate_proxy.py /app/translate_proxy.py
-
-# 安装 Python 依赖（使用清华镜像源加速）
-RUN pip install --no-cache-dir -i https://pypi.tuna.tsinghua.edu.cn/simple \
-    flask requests flask-cors
-
-# 暴露端口（50116 代理之后的端口）
 EXPOSE 50116
 
-# 启动命令
-CMD ["python", "translate_proxy.py"]
+CMD ["sh", "-c", "PHP_CLI_SERVER_WORKERS=20 php -S 0.0.0.0:50116 router.php"]
