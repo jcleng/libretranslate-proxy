@@ -1,3 +1,34 @@
+# 推荐[kiss-translator](https://github.com/fishjar/kiss-translator) + [LibreTranslate](https://github.com/LibreTranslate/LibreTranslate)本地翻译
+
+配置url: `http://127.0.0.1:5000/translate`
+
+```js
+// request hook
+async (args) => {
+	console.log(JSON.stringify(args));
+	const url = args.url;
+	const method = "POST";
+	const headers = { "Content-type": "application/json" };
+	const body = ({
+		q: args.texts[0],
+		source: "auto",
+		target: ["zh-CN", "zh-TW"].includes(args.toLang) ? 'zh' : args.toLang,
+		format: "text",
+		alternatives: 3,
+		api_key: ""
+	})
+	return { url, body, headers, method };
+};
+
+// response hook
+async ({ res }) => {
+  return { translations: [[res?.translatedText]] };
+};
+
+```
+
+下面的不推荐
+
 ### `libretranslate-proxy`代理[LibreTranslate](https://github.com/LibreTranslate/LibreTranslate)本地翻译给沉浸式翻译使用
 
 - 配置插件
