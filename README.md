@@ -27,6 +27,8 @@ async ({ res }) => {
 
 ```
 
+使用`local/Dockerfile`的`registry.cn-hangzhou.aliyuncs.com/jcleng/gitbuild-libretranslate-local`包含`en,zh`的镜像
+
 下面的不推荐
 
 ### `libretranslate-proxy`代理[LibreTranslate](https://github.com/LibreTranslate/LibreTranslate)本地翻译给沉浸式翻译使用
